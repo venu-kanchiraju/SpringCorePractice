@@ -1,0 +1,48 @@
+package com.example.springcorepractice;
+//create Student and Address classes.
+public class Address {
+    public String getCity(){
+        return "Hyderabad";
+    }
+}
+------------------------------
+package com.example.springcorepractice;
+public class Student {
+ private Address address;
+ public void setAddress(Address address){
+     this.address=address;
+ }
+public void display(){
+    System.out.println(address.getCity());
+}
+}
+---------------------------
+package com.example.springcorepractice;
+import org.springframework.context.ApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+@SpringBootApplication
+public class SpringcorepracticeApplication {
+	public static void main(String[] args) {
+        ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+        Student s=context.getBean("student",Student.class);
+s.display();
+    ---------beans.xml---------------
+      <?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="address" class="com.example.springcorepractice.Address"/>
+    <bean id="student" class="com.example.springcorepractice.Student">
+   <property name="address" ref="address"/>
+    </bean>
+</beans>
+      ------------------------------output-------------
+      Hyderabad
+	}
+}
