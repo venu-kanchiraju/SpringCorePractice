@@ -1,0 +1,41 @@
+package com.example.springcorepractice;
+//Inject student name using setter injection
+public class Student {
+    private String name;
+    public void setName(String name){
+        this.name=name;
+    }
+    public void display(){
+        System.out.println(name);
+    }
+}
+package com.example.springcorepractice;
+import org.springframework.context.ApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+@SpringBootApplication
+public class SpringcorepracticeApplication {
+	public static void main(String[] args) {
+        ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+        Student s=context.getBean("student",Student.class);
+        s.display();
+	}
+}
+-----------------beans.xml--------------------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student"
+          class="com.example.springcorepractice.Student">
+        <property name="name" value="venu"/>
+    </bean>
+</beans>
+----------output------------
+  venu
