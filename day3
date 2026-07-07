@@ -1,5 +1,5 @@
 package com.example.springcorepractice;
-//Inject student name using setter injection
+// Inject student name using setter injection
 public class Student {
     private String name;
     public void setName(String name){
