@@ -1,0 +1,36 @@
+package com.example.springcorepractice;
+//check whether prototype returns same object
+public class Student {
+
+}
+---------------
+  package com.example.springcorepractice;
+import org.springframework.context.ApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+@SpringBootApplication
+public class SpringcorepracticeApplication {
+	public static void main(String[] args) {
+        ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+        Student s=context.getBean("student",Student.class);
+        Student s1=context.getBean(Student.class);
+        System.out.println(s==s1);
+
+	}
+}
+--------------beans.xml--------------
+  <?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student" class="com.example.springcorepractice.Student" scope="prototype"/>
+</beans>
+      -------------------output----------------
+      false
+  
